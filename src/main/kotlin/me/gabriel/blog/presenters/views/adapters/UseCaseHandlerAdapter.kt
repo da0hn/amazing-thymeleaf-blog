@@ -4,6 +4,7 @@ import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UseCaseHandler
 import org.springframework.stereotype.Service
 import java.util.function.Function
+import java.util.stream.Stream
 
 /**
  * @author daohn
@@ -16,6 +17,9 @@ class UseCaseHandlerAdapter : UseCaseHandler {
         input: I,
         outputMapper: Function<O, R>
     ): R {
-        TODO("Not yet implemented")
+        return Stream.of(useCase.handle(input))
+            .map(outputMapper)
+            .findAny()
+            .orElseThrow { UseCaseHandlerException() }
     }
 }
