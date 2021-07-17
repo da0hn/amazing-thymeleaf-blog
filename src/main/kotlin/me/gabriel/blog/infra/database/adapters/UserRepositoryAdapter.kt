@@ -1,8 +1,9 @@
-package me.gabriel.blog.data.database.adapters
+package me.gabriel.blog.infra.database.adapters
 
 import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.ports.UserRepository
-import me.gabriel.blog.data.database.repositories.UserJpaRepository
+import me.gabriel.blog.infra.database.entities.UserEntity
+import me.gabriel.blog.infra.database.repositories.UserJpaRepository
 import org.springframework.stereotype.Component
 
 /**
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Component
 @Component
 class UserRepositoryAdapter(private val repository: UserJpaRepository) : UserRepository {
     override fun save(user: User) {
-        TODO("Not yet implemented")
+        val entity = UserEntity.from(user)
+
+        repository.save(entity).also(::println)
     }
 }

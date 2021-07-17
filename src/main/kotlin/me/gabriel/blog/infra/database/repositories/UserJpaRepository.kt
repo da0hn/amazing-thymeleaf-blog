@@ -1,6 +1,6 @@
-package me.gabriel.blog.data.database.repositories
+package me.gabriel.blog.infra.database.repositories
 
-import me.gabriel.blog.data.database.entities.UserEntity
+import me.gabriel.blog.infra.database.entities.UserEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

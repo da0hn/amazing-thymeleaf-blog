@@ -8,7 +8,7 @@ class User(var name: String, var email: String, var password: String, confirmPas
 
     init {
         if(password != confirmPassword) {
-            throw PasswordDontMatchException("Password and confirm password don't match!")
+            throw PasswordDontMatchException("Password don't match!")
         }
     }
 
