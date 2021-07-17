@@ -58,34 +58,34 @@
           <h1>Cadastrar-se</h1>
         </div>
 
-        <form action="">
+        <form action="index.html" th:action="@{/sign-up}" method="post">
 
           <div class="row">
             <div class="form-group col-6">
               <label>Nome</label>
-              <input type="text" class="form-control">
+              <input type="text" name="name" class="form-control" autofocus>
             </div>
             <div class="form-group col-6">
               <label>Email</label>
-              <input type="email" class="form-control">
+              <input type="email" name="email" class="form-control">
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-6">
               <label>Senha</label>
-              <input type="password" class="form-control">
+              <input type="password" name="password" class="form-control">
             </div>
             <div class="form-group col-6">
               <label>Confirmar senha</label>
-              <input type="password" class="form-control">
+              <input type="password" name="confirmPassword" class="form-control">
             </div>
           </div>
 
           <hr>
 
-          <button class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
-          <button class="btn btn-primary float-right"><i class="far fa-window-close"></i> Cancelar</button>
+          <button class="btn btn-danger"><i class="far fa-window-close"></i> Cancelar</button>
+          <button class="btn btn-primary float-right" type="submit"><i class="fas fa-save"></i> Salvar</button>
 
         </form>
 
