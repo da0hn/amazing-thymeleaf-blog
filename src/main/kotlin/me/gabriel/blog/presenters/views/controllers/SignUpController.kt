@@ -4,6 +4,8 @@ import me.gabriel.blog.core.ports.UseCaseHandler
 import me.gabriel.blog.core.usecases.user.CreateUserInputValue
 import me.gabriel.blog.core.usecases.user.CreateUserUseCase
 import me.gabriel.blog.presenters.views.dtos.UserFormDto
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -22,8 +24,9 @@ class SignUpController(
 ) {
 
     @GetMapping
-    fun form(): String {
+    fun form(model: Model): String {
         println("form()")
+        model.addAttribute("user", UserFormDto())
         return "sign-up"
     }
 
@@ -40,6 +43,7 @@ class SignUpController(
                 println(it)
                 model.addAttribute("message", it)
             }
+            model.addAttribute("user", user)
             return "sign-up"
         }
         return "redirect:/"

@@ -58,27 +58,27 @@
           <h1>Cadastrar-se</h1>
         </div>
 
-        <form action="index.html" th:action="@{/sign-up}" method="post">
+        <form action="index.html" th:action="@{/sign-up}" th:object="${user}" method="post">
 
           <div class="row">
             <div class="form-group col-6">
               <label>Nome</label>
-              <input type="text" name="name" class="form-control" autofocus>
+              <input type="text" th:field="*{name}" class="form-control" autofocus>
             </div>
             <div class="form-group col-6">
               <label>Email</label>
-              <input type="email" name="email" class="form-control">
+              <input type="email" th:field="*{email}" class="form-control">
             </div>
           </div>
 
           <div class="row">
             <div class="form-group col-6">
               <label>Senha</label>
-              <input type="password" name="password" class="form-control">
+              <input type="password" th:field="*{password}" class="form-control">
             </div>
             <div class="form-group col-6">
               <label>Confirmar senha</label>
-              <input type="password" name="confirmPassword" class="form-control">
+              <input type="password" th:field="*{confirmPassword}" class="form-control">
             </div>
           </div>
 

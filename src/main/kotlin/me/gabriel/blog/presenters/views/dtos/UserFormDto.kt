@@ -5,8 +5,8 @@ package me.gabriel.blog.presenters.views.dtos
  * @since 16/07/2021
  */
 data class UserFormDto(
-    val name: String,
-    val email: String,
-    val password: String,
-    val confirmPassword: String
+    var name: String = "",
+    var email: String = "",
+    var password: String = "",
+    var confirmPassword: String = ""
 )
