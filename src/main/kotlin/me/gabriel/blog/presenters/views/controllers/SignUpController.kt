@@ -23,16 +23,18 @@ class SignUpController(
     private val createUserUseCase: CreateUserUseCase
 ) {
 
+    private val logger: Logger = LoggerFactory.getLogger(javaClass)
+
     @GetMapping
     fun form(model: Model): String {
-        println("form()")
+        logger.info("form()")
         model.addAttribute("user", UserFormDto())
         return "sign-up"
     }
 
     @PostMapping
     fun signup(user: UserFormDto, model: Model): String {
-        println("signup()")
+        logger.info("signup()")
         try {
             useCaseHandler.handle(
                 createUserUseCase,
@@ -40,7 +42,7 @@ class SignUpController(
             ) { output -> output }
         } catch (e: Exception) {
             e.message?.let {
-                println(it)
+                logger.error(it)
                 model.addAttribute("message", it)
             }
             model.addAttribute("user", user)
