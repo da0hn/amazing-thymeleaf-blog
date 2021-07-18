@@ -40,6 +40,11 @@ class SignUpController(
                 createUserUseCase,
                 CreateUserInputValue(user)
             ) { output -> output }
+
+            logger.info("User ${user.name} created successfully.")
+
+            return "redirect:/login"
+
         } catch (e: Exception) {
             e.message?.let {
                 logger.error(it)
@@ -48,6 +53,5 @@ class SignUpController(
             model.addAttribute("user", user)
             return "sign-up"
         }
-        return "redirect:/"
     }
 }
