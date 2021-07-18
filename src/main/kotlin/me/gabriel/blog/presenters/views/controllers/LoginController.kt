@@ -60,4 +60,12 @@ class LoginController(
         return "redirect:/"
     }
 
+    @GetMapping("/logout")
+    fun logout(session: HttpSession): String {
+
+        session.invalidate()
+
+        return "redirect:/"
+    }
+
 }
