@@ -9,14 +9,14 @@ import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
 class User(var name: String?, var email: String?, var password: String?) {
 
     init {
-        if (name == null) {
-            throw IllegalStateException("Name must be not null")
+        if (name.isNullOrEmpty()) {
+            throw IllegalStateException("Name must be not empty")
         }
-        if (email == null) {
-            throw IllegalStateException("Email must be not null")
+        if (email.isNullOrEmpty()) {
+            throw IllegalStateException("Email must be not empty")
         }
-        if (password == null) {
-            throw IllegalStateException("Password must be not null")
+        if (password.isNullOrEmpty()) {
+            throw IllegalStateException("Password must be not empty")
         }
     }
 
