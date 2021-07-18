@@ -22,11 +22,19 @@ data class UserEntity(
     companion object {
         fun from(user: User): UserEntity {
             return UserEntity(
-                name = user.name,
-                email = user.email,
-                password = user.password,
+                name = user.name!!,
+                email = user.email!!,
+                password = user.password!!,
             )
         }
+    }
+
+    fun toUser() : User {
+        return User(
+            this.name,
+            this.email,
+            this.password
+        )
     }
 
     override fun equals(other: Any?): Boolean {

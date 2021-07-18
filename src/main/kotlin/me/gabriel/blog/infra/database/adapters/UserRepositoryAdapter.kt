@@ -5,6 +5,7 @@ import me.gabriel.blog.core.ports.UserRepository
 import me.gabriel.blog.infra.database.entities.UserEntity
 import me.gabriel.blog.infra.database.repositories.UserJpaRepository
 import org.springframework.stereotype.Component
+import java.util.*
 
 /**
  * @author daohn
@@ -16,5 +17,15 @@ class UserRepositoryAdapter(private val repository: UserJpaRepository) : UserRep
         val entity = UserEntity.from(user)
 
         repository.save(entity).also(::println)
+    }
+
+    override fun findUserByEmail(email: String): Optional<User> {
+        val optionalEntity = repository.findUserEntitiesByEmail(email)
+
+        if (optionalEntity.isEmpty) {
+            return Optional.empty()
+        }
+
+        return optionalEntity.map { user -> user.toUser() }
     }
 }

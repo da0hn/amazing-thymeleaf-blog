@@ -1,6 +1,7 @@
 package me.gabriel.blog.core.ports
 
 import me.gabriel.blog.core.domain.User
+import java.util.*
 
 /**
  * @author daohn
@@ -9,5 +10,7 @@ import me.gabriel.blog.core.domain.User
 interface UserRepository {
 
     fun save(user: User)
+
+    fun findUserByEmail(email: String) : Optional<User>
 
 }
