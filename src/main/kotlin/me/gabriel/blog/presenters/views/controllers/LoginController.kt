@@ -11,7 +11,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.servlet.mvc.support.RedirectAttributes
+import javax.servlet.http.HttpSession
 
 /**
  * @author daohn
@@ -34,7 +34,7 @@ class LoginController(
     }
 
     @PostMapping
-    fun login(user: UserLoginDto, model: Model, redirectAttributes: RedirectAttributes): String {
+    fun login(user: UserLoginDto, model: Model, session: HttpSession): String {
         logger.info("login()")
 
         try {
@@ -45,7 +45,7 @@ class LoginController(
 
             logger.info("Login successfully")
 
-            redirectAttributes.addFlashAttribute("currentUser", loggedUser)
+            session.setAttribute("currentUser", loggedUser)
 
         } catch (e: Exception) {
             e.message?.let {
