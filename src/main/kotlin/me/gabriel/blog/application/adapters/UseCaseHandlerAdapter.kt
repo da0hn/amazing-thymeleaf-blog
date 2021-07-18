@@ -1,4 +1,4 @@
-package me.gabriel.blog.presenters.views.adapters
+package me.gabriel.blog.application.adapters
 
 import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UseCaseHandler

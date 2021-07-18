@@ -1,4 +1,4 @@
-package me.gabriel.blog.presenters.views.dtos
+package me.gabriel.blog.application.views.dtos
 
 /**
  * @author daohn

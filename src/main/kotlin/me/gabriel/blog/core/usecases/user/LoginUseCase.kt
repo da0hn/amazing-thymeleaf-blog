@@ -5,7 +5,7 @@ import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
 import me.gabriel.blog.core.domain.exceptions.UserNotFoundException
 import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UserRepository
-import me.gabriel.blog.presenters.views.dtos.UserLoginDto
+import me.gabriel.blog.application.views.dtos.UserLoginDto
 import org.springframework.stereotype.Component
 
 /**

@@ -1,4 +1,4 @@
-package me.gabriel.blog.presenters.views.controllers
+package me.gabriel.blog.application.views.controllers
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

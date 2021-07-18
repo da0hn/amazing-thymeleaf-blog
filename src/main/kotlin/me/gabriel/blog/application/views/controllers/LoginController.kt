@@ -1,9 +1,9 @@
-package me.gabriel.blog.presenters.views.controllers
+package me.gabriel.blog.application.views.controllers
 
+import me.gabriel.blog.application.views.dtos.UserLoginDto
 import me.gabriel.blog.core.ports.UseCaseHandler
 import me.gabriel.blog.core.usecases.user.LoginInputValue
 import me.gabriel.blog.core.usecases.user.LoginUseCase
-import me.gabriel.blog.presenters.views.dtos.UserLoginDto
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller

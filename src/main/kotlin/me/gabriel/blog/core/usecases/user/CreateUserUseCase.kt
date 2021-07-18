@@ -3,7 +3,7 @@ package me.gabriel.blog.core.usecases.user
 import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UserRepository
-import me.gabriel.blog.presenters.views.dtos.UserFormDto
+import me.gabriel.blog.application.views.dtos.UserFormDto
 import org.springframework.stereotype.Component
 
 /**
