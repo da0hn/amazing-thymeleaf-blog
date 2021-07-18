@@ -2,6 +2,7 @@ package me.gabriel.blog.presenters.views.adapters
 
 import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UseCaseHandler
+import me.gabriel.blog.core.usecases.UseCaseHandlerException
 import org.springframework.stereotype.Service
 import java.util.function.Function
 import java.util.stream.Stream

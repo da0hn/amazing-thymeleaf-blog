@@ -1,4 +1,4 @@
-package me.gabriel.blog.presenters.views.adapters
+package me.gabriel.blog.core.usecases
 
 /**
  * @author daohn
@@ -8,5 +8,5 @@ class UseCaseHandlerException : RuntimeException {
 
     constructor() : super()
 
-    constructor(message: String?) : super(message)
+    constructor(message: String) : super(message)
 }
