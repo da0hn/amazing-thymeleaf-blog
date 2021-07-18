@@ -1,5 +1,7 @@
 package me.gabriel.blog.core.domain
 
+import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
+
 /**
  * @author daohn
  * @since 17/07/2021

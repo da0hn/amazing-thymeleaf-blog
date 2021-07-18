@@ -1,4 +1,4 @@
-package me.gabriel.blog.core.domain
+package me.gabriel.blog.core.domain.exceptions
 
 /**
  * @author daohn
@@ -8,7 +8,7 @@ class InvalidPasswordException : RuntimeException {
 
     constructor() : super()
 
-    constructor(message: String?) : super(message)
+    constructor(message: String) : super(message)
 
 
 }

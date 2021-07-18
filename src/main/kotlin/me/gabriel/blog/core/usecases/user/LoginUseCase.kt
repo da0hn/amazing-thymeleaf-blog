@@ -1,8 +1,8 @@
 package me.gabriel.blog.core.usecases.user
 
-import me.gabriel.blog.core.domain.InvalidPasswordException
 import me.gabriel.blog.core.domain.User
-import me.gabriel.blog.core.domain.UserNotFoundException
+import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
+import me.gabriel.blog.core.domain.exceptions.UserNotFoundException
 import me.gabriel.blog.core.ports.UseCase
 import me.gabriel.blog.core.ports.UserRepository
 import me.gabriel.blog.presenters.views.dtos.UserLoginDto
@@ -24,7 +24,7 @@ class LoginUseCase(
 
         val user = this.userRepository
             .findUserByEmail(userLoginDto.email!!)
-            .orElseThrow { UserNotFoundException() }
+            .orElseThrow { UserNotFoundException("There is no user with this email") }
 
         this.verifyPassword(user, userLoginDto)
 
