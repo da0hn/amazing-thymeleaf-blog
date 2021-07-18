@@ -21,6 +21,6 @@ class UseCaseHandlerAdapter : UseCaseHandler {
         return Stream.of(useCase.handle(input))
             .map(outputMapper)
             .findAny()
-            .orElseThrow { UseCaseHandlerException() }
+            .orElseThrow { UseCaseHandlerException("Output value not found") }
     }
 }
