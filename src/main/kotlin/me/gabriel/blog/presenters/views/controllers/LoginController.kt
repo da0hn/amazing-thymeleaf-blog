@@ -11,6 +11,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 /**
  * @author daohn
@@ -33,16 +34,18 @@ class LoginController(
     }
 
     @PostMapping
-    fun login(user: UserLoginDto, model: Model): String {
+    fun login(user: UserLoginDto, model: Model, redirectAttributes: RedirectAttributes): String {
         logger.info("login()")
 
         try {
-            useCaseHandler.handle(
+            val loggedUser = useCaseHandler.handle(
                 loginUseCase,
                 LoginInputValue(user),
-            ) { outputValue ->
-                outputValue
-            }
+            ) { outputValue -> outputValue.user }
+
+            logger.info("Login successfully")
+
+            redirectAttributes.addFlashAttribute("currentUser", loggedUser)
 
         } catch (e: Exception) {
             e.message?.let {
