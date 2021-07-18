@@ -28,4 +28,8 @@ class UserRepositoryAdapter(private val repository: UserJpaRepository) : UserRep
 
         return optionalEntity.map { user -> user.toUser() }
     }
+
+    override fun count(): Long {
+        return repository.count()
+    }
 }

@@ -13,4 +13,5 @@ interface UserRepository {
 
     fun findUserByEmail(email: String) : Optional<User>
 
+    fun count() : Long
 }
