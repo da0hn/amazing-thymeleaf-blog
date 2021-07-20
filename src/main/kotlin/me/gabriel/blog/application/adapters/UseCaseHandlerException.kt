@@ -1,4 +1,4 @@
-package me.gabriel.blog.core.usecases
+package me.gabriel.blog.application.adapters
 
 /**
  * @author daohn
