@@ -21,4 +21,6 @@ class CategoryRepositoryAdapter(
     }
 
     override fun count(): Long = this.repository.count()
+
+    override fun findAll(): List<Category> = this.repository.findAll().map(CategoryEntity::toCategory).toList()
 }

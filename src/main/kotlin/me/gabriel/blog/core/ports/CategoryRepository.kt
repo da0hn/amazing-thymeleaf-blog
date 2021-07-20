@@ -10,5 +10,6 @@ interface CategoryRepository {
 
     fun save(category: Category)
     fun count(): Long
+    fun findAll(): List<Category>
 
 }
