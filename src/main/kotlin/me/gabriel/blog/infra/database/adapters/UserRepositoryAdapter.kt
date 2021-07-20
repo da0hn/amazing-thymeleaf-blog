@@ -16,7 +16,7 @@ class UserRepositoryAdapter(private val repository: UserJpaRepository) : UserRep
     override fun save(user: User) {
         val entity = UserEntity.from(user)
 
-        repository.save(entity).also(::println)
+        repository.save(entity)
     }
 
     override fun findUserByEmail(email: String): Optional<User> {
