@@ -2,7 +2,7 @@ package me.gabriel.blog.infra.database.entities
 
 import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
-import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -21,7 +21,7 @@ data class ArticleEntity(
     var subTitle: String,
     var content: String,
     @CreatedDate
-    var date: LocalDate,
+    var date: LocalDateTime,
     @ManyToOne
     var author: AuthorEntity
 ) {
