@@ -7,4 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository
  * @author daohn
  * @since 20/07/2021
  */
-interface AuthorRepository : JpaRepository<AuthorEntity, Long>
+interface AuthorJpaRepository : JpaRepository<AuthorEntity, Long>

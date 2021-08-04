@@ -11,7 +11,5 @@ import java.util.*
  */
 @Repository
 interface UserJpaRepository : JpaRepository<UserEntity, Long> {
-
-
-    fun findUserEntitiesByEmail(email: String) : Optional<UserEntity>
+    fun findUserEntitiesByEmail(email: String): Optional<UserEntity>
 }
