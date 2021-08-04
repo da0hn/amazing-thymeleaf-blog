@@ -1,7 +1,7 @@
 package me.gabriel.blog.core.usecases.category
 
 import me.gabriel.blog.core.ports.CategoryRepository
-import me.gabriel.blog.core.ports.UseCase
+import me.gabriel.blog.core.usecases.UseCase
 import org.springframework.stereotype.Component
 
 /**

@@ -1,6 +1,6 @@
 package me.gabriel.blog.application.views.controllers
 
-import me.gabriel.blog.core.ports.UseCaseHandler
+import me.gabriel.blog.core.usecases.UseCaseHandler
 import me.gabriel.blog.core.usecases.category.FindAllCategoryInputValue
 import me.gabriel.blog.core.usecases.category.FindAllCategoryOutputValue
 import me.gabriel.blog.core.usecases.category.FindAllCategoryUseCase

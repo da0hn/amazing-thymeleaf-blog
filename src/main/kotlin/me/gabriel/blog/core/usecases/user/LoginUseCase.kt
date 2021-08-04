@@ -3,7 +3,7 @@ package me.gabriel.blog.core.usecases.user
 import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
 import me.gabriel.blog.core.domain.exceptions.UserNotFoundException
-import me.gabriel.blog.core.ports.UseCase
+import me.gabriel.blog.core.usecases.UseCase
 import me.gabriel.blog.core.ports.UserRepository
 import me.gabriel.blog.application.views.dtos.UserLoginDto
 import org.springframework.stereotype.Component

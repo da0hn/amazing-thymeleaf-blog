@@ -1,7 +1,7 @@
 package me.gabriel.blog.application.adapters
 
-import me.gabriel.blog.core.ports.UseCase
-import me.gabriel.blog.core.ports.UseCaseHandler
+import me.gabriel.blog.core.usecases.UseCase
+import me.gabriel.blog.core.usecases.UseCaseHandler
 import org.springframework.stereotype.Service
 import java.util.function.Function
 import java.util.stream.Stream

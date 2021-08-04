@@ -1,4 +1,4 @@
-package me.gabriel.blog.core.ports
+package me.gabriel.blog.core.usecases
 
 /**
  * @author daohn

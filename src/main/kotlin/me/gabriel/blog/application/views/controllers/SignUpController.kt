@@ -1,7 +1,7 @@
 package me.gabriel.blog.application.views.controllers
 
 import me.gabriel.blog.application.views.dtos.UserFormDto
-import me.gabriel.blog.core.ports.UseCaseHandler
+import me.gabriel.blog.core.usecases.UseCaseHandler
 import me.gabriel.blog.core.usecases.user.CreateUserInputValue
 import me.gabriel.blog.core.usecases.user.CreateUserUseCase
 import org.slf4j.Logger

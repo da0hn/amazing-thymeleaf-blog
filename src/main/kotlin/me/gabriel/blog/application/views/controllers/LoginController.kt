@@ -1,7 +1,7 @@
 package me.gabriel.blog.application.views.controllers
 
 import me.gabriel.blog.application.views.dtos.UserLoginDto
-import me.gabriel.blog.core.ports.UseCaseHandler
+import me.gabriel.blog.core.usecases.UseCaseHandler
 import me.gabriel.blog.core.usecases.user.LoginInputValue
 import me.gabriel.blog.core.usecases.user.LoginUseCase
 import org.slf4j.Logger
