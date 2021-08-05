@@ -1,5 +1,6 @@
 package me.gabriel.blog.infra.database.entities
 
+import me.gabriel.blog.core.domain.Article
 import org.hibernate.Hibernate
 import org.springframework.data.annotation.CreatedDate
 import java.time.LocalDateTime
@@ -21,10 +22,35 @@ data class ArticleEntity(
     var subTitle: String,
     var content: String,
     @CreatedDate
-    var date: LocalDateTime,
+    var date: LocalDateTime? = null,
     @ManyToOne
     var author: AuthorEntity
 ) {
+
+    companion object {
+        fun from(article: Article): ArticleEntity {
+            return ArticleEntity(
+                article.id,
+                article.title,
+                article.subTitle,
+                article.content,
+                article.date,
+                AuthorEntity.from(article.author)
+            )
+        }
+    }
+
+    fun toArticle(): Article {
+        return Article(
+            id,
+            title,
+            subTitle,
+            content,
+            date,
+            author.toAuthor()
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false

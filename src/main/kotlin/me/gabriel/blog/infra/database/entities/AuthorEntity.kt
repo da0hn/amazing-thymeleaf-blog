@@ -1,5 +1,6 @@
 package me.gabriel.blog.infra.database.entities
 
+import me.gabriel.blog.core.domain.Author
 import org.hibernate.Hibernate
 import javax.persistence.*
 
@@ -12,14 +13,35 @@ data class AuthorEntity(
     @Id
     @GeneratedValue
     var id: Long? = null,
-    var about: String,
+    var about: String?,
 
     @OneToOne
     var user: UserEntity,
 
     @OneToMany(mappedBy = "author")
-    var articles: List<ArticleEntity>
+    var articles: List<ArticleEntity>?
 ) {
+
+    companion object {
+        fun from(author: Author): AuthorEntity {
+            return AuthorEntity(
+                author.id,
+                author.about,
+                UserEntity.from(author.user),
+                author.articles?.map(ArticleEntity.Companion::from)
+            )
+        }
+    }
+
+    fun toAuthor(): Author {
+        return Author(
+            id,
+            about,
+            user.toUser(),
+            articles?.map(ArticleEntity::toArticle)
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || Hibernate.getClass(this) != Hibernate.getClass(other)) return false

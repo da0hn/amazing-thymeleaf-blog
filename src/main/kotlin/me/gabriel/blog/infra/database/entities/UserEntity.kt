@@ -29,8 +29,9 @@ data class UserEntity(
         }
     }
 
-    fun toUser() : User {
+    fun toUser(): User {
         return User(
+            this.id,
             this.name,
             this.email,
             this.password
