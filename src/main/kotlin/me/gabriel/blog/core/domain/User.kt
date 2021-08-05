@@ -6,7 +6,7 @@ import me.gabriel.blog.core.domain.exceptions.InvalidPasswordException
  * @author daohn
  * @since 17/07/2021
  */
-class User(var id: Long?, var name: String?, var email: String?, var password: String?) {
+class User(var id: Long? = null, var name: String?, var email: String?, var password: String?) {
 
     init {
         if (name.isNullOrEmpty()) {
@@ -20,7 +20,11 @@ class User(var id: Long?, var name: String?, var email: String?, var password: S
         }
     }
 
-    constructor(name: String?, email: String?, password: String?, confirmPassword: String) : this(null, name, email, password) {
+    constructor(name: String?, email: String?, password: String?, confirmPassword: String) : this(
+        name = name,
+        email = email,
+        password = password
+    ) {
         if (password != confirmPassword) {
             throw InvalidPasswordException("Password don't match!")
         }
