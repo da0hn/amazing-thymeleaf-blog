@@ -109,6 +109,19 @@
           <p class="lead my-3" th:text="#{blog.subTitle}"></p>
         </div>
       </div>
+
+      <div th:if="${message != null}">
+        <br>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <span th:text="${message}"></span>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+
     </div>
 
     <main role="main" class="container">

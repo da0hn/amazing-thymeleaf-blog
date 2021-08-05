@@ -11,6 +11,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.servlet.http.HttpSession
 
 /**
@@ -37,7 +38,11 @@ class ArticleController(
     }
 
     @PostMapping
-    fun create(articleForm: ArticleFormDto, session: HttpSession): String {
+    fun create(
+        articleForm: ArticleFormDto,
+        session: HttpSession,
+        redirectAttributes: RedirectAttributes
+    ): String {
 
         logger.info("Creating article '${articleForm.title}'")
 
@@ -50,6 +55,8 @@ class ArticleController(
         }
 
         logger.info("Redirect to index endpoint")
+
+        redirectAttributes.addFlashAttribute("message", "Artigo criado com sucesso")
 
         return "redirect:/"
     }
