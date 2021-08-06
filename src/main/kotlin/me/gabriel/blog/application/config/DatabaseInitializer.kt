@@ -1,13 +1,17 @@
 package me.gabriel.blog.application.config
 
+import me.gabriel.blog.core.domain.Article
+import me.gabriel.blog.core.domain.Author
 import me.gabriel.blog.core.domain.Category
 import me.gabriel.blog.core.domain.User
+import me.gabriel.blog.core.ports.ArticleRepository
 import me.gabriel.blog.core.ports.CategoryRepository
 import me.gabriel.blog.core.ports.UserRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Configuration
+import java.time.LocalDateTime
 
 /**
  * @author daohn
@@ -16,7 +20,8 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class DatabaseInitializer(
     private val userRepository: UserRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val articleRepository: ArticleRepository,
 ) : CommandLineRunner {
 
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
@@ -24,20 +29,59 @@ class DatabaseInitializer(
 
     override fun run(vararg args: String?) {
 
-        if (userRepository.count() == 0L) {
-            logger.info("Initializing User data")
+        val users = createUsers()
 
-            val admin = User(
-                name = "admin",
-                email = "admin@blog.com",
-                password = "admin"
+        val authors = createAuthors(users)
+
+        val categories = createCategories()
+
+        val articles = createArticles(authors)
+    }
+
+    private fun createArticles(authors: List<Author>): List<Article> {
+        if (articleRepository.countArticle() == 0L && authors.isNotEmpty()) {
+
+            logger.info("Initializing Article data")
+
+            val articles = listOf(
+                Article(
+                    null,
+                    "Title 1",
+                    "Sub title 1",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    LocalDateTime.now(),
+                    authors[0]
+                ),
+                Article(
+                    null,
+                    "Title 2",
+                    "Sub title 2",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    LocalDateTime.now(),
+                    authors[0]
+                ),
+                Article(
+                    null,
+                    "Title 3",
+                    "Sub title 3",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    LocalDateTime.now(),
+                    authors[0]
+                ),
             )
 
-            userRepository.save(admin)
+            articles.forEach {
+                articleRepository.saveArticle(it)
+                logger.info("Article ${it.title} created successfully")
+            }
 
-            logger.info("User ${admin.name} created successfully")
+            return articles
         }
 
+        return listOf()
+    }
+
+    private fun createCategories(): List<Category> {
         if (categoryRepository.count() == 0L) {
             logger.info("Initializing Category data")
 
@@ -60,6 +104,48 @@ class DatabaseInitializer(
                 categoryRepository.save(it)
                 logger.info("Category ${it.name} created successfully")
             }
+
+            return categories
         }
+        return listOf()
+    }
+
+    private fun createUsers(): List<User> {
+        if (userRepository.count() == 0L) {
+            logger.info("Initializing User data")
+
+            val users = mutableListOf(
+                User(
+                    name = "admin",
+                    email = "admin@blog.com",
+                    password = "admin"
+                )
+            )
+
+            users.map {
+                this.userRepository.save(it)
+                logger.info("User ${it.name} created successfully")
+            }
+
+            return users
+        }
+        return listOf()
+    }
+
+    private fun createAuthors(users: List<User>): List<Author> {
+        if (articleRepository.countAuthor() == 0L && users.isNotEmpty()) {
+            val authors = mutableListOf(
+                Author(users[0])
+            )
+
+            authors.forEach { author ->
+                val createdAuthor = articleRepository.saveAuthor(author)
+                author.id = createdAuthor.id
+                logger.info("Author ${author.user.name} created successfully")
+            }
+
+            return authors
+        }
+        return listOf()
     }
 }
