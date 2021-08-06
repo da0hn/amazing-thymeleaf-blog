@@ -13,10 +13,10 @@ import java.util.*
  */
 @Component
 class UserRepositoryAdapter(private val repository: UserJpaRepository) : UserRepository {
-    override fun save(user: User) {
-        val entity = UserEntity.from(user)
-
-        repository.save(entity)
+    override fun save(user: User): User {
+        val userCreated = repository.save(UserEntity.from(user)).toUser()
+        user.id = userCreated.id
+        return userCreated
     }
 
     override fun findUserByEmail(email: String): Optional<User> {

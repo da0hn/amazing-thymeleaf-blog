@@ -12,10 +12,14 @@ interface ArticleRepository {
 
     fun findAllArticles(): List<Article>
 
+    fun countArticle(): Long
+
     fun saveArticle(article: Article): Article
 
     fun findAuthorByUserId(userId: Long): Optional<Author>
 
     fun saveAuthor(author: Author): Author
+
+    fun countAuthor(): Long
 
 }

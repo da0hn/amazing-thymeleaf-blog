@@ -22,6 +22,8 @@ class ArticleRepositoryAdapter(
 
     override fun findAllArticles(): List<Article> = this.articleRepository.findAll().map(ArticleEntity::toArticle)
 
+    override fun countArticle(): Long = this.articleRepository.count()
+
     override fun saveArticle(article: Article): Article = this.articleRepository
         .save(ArticleEntity.from(article)).toArticle()
 
@@ -34,4 +36,6 @@ class ArticleRepositoryAdapter(
     override fun saveAuthor(author: Author): Author = this.authorRepository
         .save(AuthorEntity.from(author))
         .toAuthor()
+
+    override fun countAuthor(): Long = authorRepository.count()
 }

@@ -9,7 +9,7 @@ import java.util.*
  */
 interface UserRepository {
 
-    fun save(user: User)
+    fun save(user: User) : User
 
     fun findUserByEmail(email: String) : Optional<User>
 

@@ -38,7 +38,7 @@ data class AuthorEntity(
             id,
             about,
             user.toUser(),
-            articles?.map(ArticleEntity::toArticle)
+            null
         )
     }
 
