@@ -76,7 +76,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">
-                    <i class="fas fa-user-edit"></i> Perfil
+                  <i class="fas fa-user-edit"></i> Perfil
                 </a>
                 <a class="dropdown-item" href="articles.html" th:href="@{/articles}">
                   <i class="fas fa-plus"></i> Novo Artigo
@@ -127,17 +127,26 @@
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8 blog-main">
-          <div class="blog-post" th:each="article : ${articles}">
-            <h1 class="blog-post-title" th:text="${article.title}">Sample blog post</h1>
-            <p class="blog-post-meta">
-              <span th:text="${article.date}">January 1, 2014 by</span>
-              <a href="#" th:text="${article.author.user.name}">Mark</a>
-            </p>
 
-            <h3 th:text="${article.subTitle}">Sub Title</h3>
-            <hr>
-            <p th:text="${article.content}">Etiam porta mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean
-              lacinia bibendum nulla sed consectetur.</p>
+          <div class="card blog-post" th:each="article : ${articles}">
+
+            <h1 class="blog-post-title card-header" th:text="${article.title}">Sample blog post</h1>
+
+            <div class="card-body">
+              <h5 class=" card-title text-muted" th:text="${article.subTitle}">Sub Title</h5>
+              <p th:text="${article.content}">Etiam porta mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean
+                lacinia bibendum nulla sed consectetur.</p>
+            </div>
+
+            <div class="card-footer text-muted">
+              <div class="badge badge-secondary">
+                Author: <a href="#" th:text="${article.author.user.name}">Author</a>
+              </div>
+              <div class="badge badge-secondary">
+                <span th:text="${article.date}">January 1, 2014 by</span>
+              </div>
+            </div>
+
           </div><!-- /.blog-post -->
 
           <nav class="blog-pagination">
