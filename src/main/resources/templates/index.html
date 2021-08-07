@@ -150,11 +150,17 @@
           </div><!-- /.blog-post -->
 
           <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">
+            <a class="btn btn-outline-primary" href="#"
+               th:href="@{'/?page='+${previousArticle}}"
+               th:classappend="${isFirst} ? 'disable'"
+            >
               <i class="fas fa-angle-double-left"></i>
               <span th:text="#{article.older}">Older</span>
             </a>
-            <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">
+            <a class="btn btn-outline-secondary" href="#"
+               th:href="@{'/?page='+${nextArticle}}"
+               th:classappend="${isLast} ? 'disable'"
+            >
               <span th:text="#{article.newer}">Newer</span>
               <i class="fas fa-angle-double-right"></i>
             </a>

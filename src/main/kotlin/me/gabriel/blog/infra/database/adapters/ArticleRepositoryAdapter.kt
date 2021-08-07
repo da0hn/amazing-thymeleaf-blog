@@ -7,6 +7,8 @@ import me.gabriel.blog.infra.database.entities.ArticleEntity
 import me.gabriel.blog.infra.database.entities.AuthorEntity
 import me.gabriel.blog.infra.database.repositories.ArticleJpaRepository
 import me.gabriel.blog.infra.database.repositories.AuthorJpaRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Component
 import java.util.*
 
@@ -21,6 +23,10 @@ class ArticleRepositoryAdapter(
 ) : ArticleRepository {
 
     override fun findAllArticles(): List<Article> = this.articleRepository.findAll().map(ArticleEntity::toArticle)
+
+    override fun findAllPaginatedArticles(page: Int, elementPerPage: Int): Page<Article> = this.articleRepository
+        .findAll(PageRequest.of(page, elementPerPage))
+        .map(ArticleEntity::toArticle)
 
     override fun countArticle(): Long = this.articleRepository.count()
 

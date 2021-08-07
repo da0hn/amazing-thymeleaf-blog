@@ -2,6 +2,7 @@ package me.gabriel.blog.core.ports
 
 import me.gabriel.blog.core.domain.Article
 import me.gabriel.blog.core.domain.Author
+import org.springframework.data.domain.Page
 import java.util.*
 
 /**
@@ -11,6 +12,8 @@ import java.util.*
 interface ArticleRepository {
 
     fun findAllArticles(): List<Article>
+
+    fun findAllPaginatedArticles(page: Int, elementPerPage: Int): Page<Article>
 
     fun countArticle(): Long
 
