@@ -135,7 +135,7 @@ class DatabaseInitializer(
     private fun createAuthors(users: List<User>): List<Author> {
         if (articleRepository.countAuthor() == 0L && users.isNotEmpty()) {
             val authors = mutableListOf(
-                Author(users[0])
+                Author(users[0], "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
             )
 
             authors.forEach { author ->

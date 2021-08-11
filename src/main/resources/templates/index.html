@@ -125,10 +125,10 @@
     </div>
 
     <main role="main" class="container">
-      <div class="row">
+      <div class="row" th:each="article : ${articles}">
         <div class="col-md-8 blog-main">
 
-          <div class="card blog-post" th:each="article : ${articles}">
+          <div class="card blog-post">
 
             <h1 class="blog-post-title card-header" th:text="${article.title}">Sample blog post</h1>
 
@@ -171,10 +171,10 @@
         <aside class="col-md-4 blog-sidebar">
           <div class="p-4 mb-3 bg-light rounded">
             <h4 class="font-italic">
-              <i class="fas fa-user"></i><span th:text="#{author.about}">About Author</span>
+              <i class="fas fa-user"></i>
+              <span th:text="${article.author.user.name}">About Author</span>
             </h4>
-            <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum.
-              Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p class="mb-0" th:text="${article.author.about}">about text</p>
             <hr/>
             <h4 class="font-italic"><i class="fas fa-network-wired"></i>
               <span th:text="#{author.network}">Social Network</span>

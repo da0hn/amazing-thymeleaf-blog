@@ -11,4 +11,6 @@ data class Author(
     var articles: List<Article>?
 ) {
     constructor(user: User) : this(null, null, user, null)
+
+    constructor(user: User, about: String) : this(null, about, user, null)
 }
