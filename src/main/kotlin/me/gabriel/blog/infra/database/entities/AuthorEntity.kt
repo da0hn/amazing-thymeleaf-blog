@@ -19,7 +19,10 @@ data class AuthorEntity(
     var user: UserEntity,
 
     @OneToMany(mappedBy = "author")
-    var articles: List<ArticleEntity>?
+    var articles: List<ArticleEntity>?,
+
+    @Embedded
+    var networks: SocialNetworkVO?,
 ) {
 
     companion object {
@@ -28,7 +31,8 @@ data class AuthorEntity(
                 author.id,
                 author.about,
                 UserEntity.from(author.user),
-                author.articles?.map(ArticleEntity.Companion::from)
+                author.articles?.map(ArticleEntity.Companion::from),
+                author.networks?.let { SocialNetworkVO.from(it) }
             )
         }
     }
@@ -38,7 +42,8 @@ data class AuthorEntity(
             id,
             about,
             user.toUser(),
-            null
+            null,
+            networks?.toSocialNetwork()
         )
     }
 

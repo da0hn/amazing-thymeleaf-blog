@@ -1,9 +1,6 @@
 package me.gabriel.blog.application.config
 
-import me.gabriel.blog.core.domain.Article
-import me.gabriel.blog.core.domain.Author
-import me.gabriel.blog.core.domain.Category
-import me.gabriel.blog.core.domain.User
+import me.gabriel.blog.core.domain.*
 import me.gabriel.blog.core.ports.ArticleRepository
 import me.gabriel.blog.core.ports.CategoryRepository
 import me.gabriel.blog.core.ports.UserRepository
@@ -140,8 +137,24 @@ class DatabaseInitializer(
     private fun createAuthors(users: List<User>): List<Author> {
         if (articleRepository.countAuthor() == 0L && users.isNotEmpty()) {
             val authors = mutableListOf(
-                Author(users[0], "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-                Author(users[1], "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
+                Author(
+                    users[0],
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    SocialNetwork(
+                        "https://facebook.com/admin",
+                        "https://twitter.com/admin",
+                        "https://linkedin.com/admin",
+                    )
+                ),
+                Author(
+                    users[1],
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    SocialNetwork(
+                        "https://facebook.com/user",
+                        "https://twitter.com/user",
+                        "https://linkedin.com/user",
+                    )
+                )
             )
 
             authors.forEach { author ->
