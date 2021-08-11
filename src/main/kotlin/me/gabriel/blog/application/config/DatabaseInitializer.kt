@@ -66,7 +66,7 @@ class DatabaseInitializer(
                     "Sub title 3",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     LocalDateTime.now(),
-                    authors[0]
+                    authors[1]
                 ),
             )
 
@@ -119,6 +119,11 @@ class DatabaseInitializer(
                     name = "admin",
                     email = "admin@blog.com",
                     password = "admin"
+                ),
+                User(
+                    name = "user",
+                    email = "user@blog.com",
+                    password = "user"
                 )
             )
 
@@ -135,7 +140,8 @@ class DatabaseInitializer(
     private fun createAuthors(users: List<User>): List<Author> {
         if (articleRepository.countAuthor() == 0L && users.isNotEmpty()) {
             val authors = mutableListOf(
-                Author(users[0], "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                Author(users[0], "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+                Author(users[1], "Lorem ipsum dolor sit amet, consectetur adipiscing elit")
             )
 
             authors.forEach { author ->
