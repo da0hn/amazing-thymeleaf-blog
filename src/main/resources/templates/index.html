@@ -180,13 +180,16 @@
               <span th:text="#{author.network}">Social Network</span>
             </h4>
             <ol class="list-unstyled">
-              <li><a href="#"><i class="fab fa-facebook-f"></i>
+              <li><a href="#" th:href="${article.author.networks.facebook}">
+                <i class="fab fa-facebook-f"></i>
                 Facebook
               </a></li>
-              <li><a href="#"><i class="fab fa-twitter"></i>
+              <li><a href="#" th:href="${article.author.networks.twitter}">
+                <i class="fab fa-twitter"></i>
                 Twitter
               </a></li>
-              <li><a href="#"><i class="fab fa-linkedin-in"></i>
+              <li><a href="#" th:href="${article.author.networks.linkedIn}">
+                <i class="fab fa-linkedin-in"></i>
                 LinkedIn
               </a></li>
             </ol>
