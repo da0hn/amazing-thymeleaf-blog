@@ -5,6 +5,10 @@ import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.usecases.UseCaseHandler
 import me.gabriel.blog.core.usecases.article.CreateArticleInputValue
 import me.gabriel.blog.core.usecases.article.CreateArticleUseCase
+import me.gabriel.blog.core.usecases.article.FindAllArticleInputValue
+import me.gabriel.blog.core.usecases.article.FindAllArticleUseCase
+import me.gabriel.blog.core.usecases.category.FindAllCategoryInputValue
+import me.gabriel.blog.core.usecases.category.FindAllCategoryUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
@@ -22,7 +26,9 @@ import javax.servlet.http.HttpSession
 @RequestMapping("/articles")
 class ArticleController(
     private val useCaseHandler: UseCaseHandler,
-    private val createArticleUseCase: CreateArticleUseCase
+    private val createArticleUseCase: CreateArticleUseCase,
+    private val findAllArticleUseCase: FindAllArticleUseCase,
+    private val findAllCategoryUseCase: FindAllCategoryUseCase
 ) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -35,6 +41,27 @@ class ArticleController(
         model.addAttribute("article", ArticleFormDto())
 
         return "articles"
+    }
+
+    @GetMapping("/list")
+    fun redirectToArticleList(model: Model): String {
+        logger.info("Redirect to articles list page")
+
+        useCaseHandler.handle(
+            findAllCategoryUseCase,
+            FindAllCategoryInputValue()
+        ) {
+            model.addAttribute("categories", it.categories)
+        }
+
+        useCaseHandler.handle(
+            findAllArticleUseCase,
+            FindAllArticleInputValue(0, 10)
+        ) {
+            model.addAttribute("articles", it.articles.content)
+        }
+
+        return "articles-list"
     }
 
     @PostMapping
