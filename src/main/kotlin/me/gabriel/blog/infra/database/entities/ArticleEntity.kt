@@ -2,7 +2,8 @@ package me.gabriel.blog.infra.database.entities
 
 import me.gabriel.blog.core.domain.Article
 import org.hibernate.Hibernate
-import org.springframework.data.annotation.CreatedDate
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -21,10 +22,14 @@ data class ArticleEntity(
     var title: String,
     var subTitle: String,
     var content: String,
-    @CreatedDate
-    var date: LocalDateTime? = null,
+    @CreationTimestamp
+    var createdAt: LocalDateTime? = null,
+    @UpdateTimestamp
+    var updatedAt: LocalDateTime? = null,
     @ManyToOne
-    var author: AuthorEntity
+    var author: AuthorEntity,
+    @ManyToOne
+    var category: CategoryEntity
 ) {
 
     companion object {
@@ -35,7 +40,9 @@ data class ArticleEntity(
                 article.subTitle,
                 article.content,
                 article.date,
-                AuthorEntity.from(article.author)
+                null,
+                AuthorEntity.from(article.author),
+                CategoryEntity.from(article.category)
             )
         }
     }
@@ -46,8 +53,9 @@ data class ArticleEntity(
             title,
             subTitle,
             content,
-            date,
-            author.toAuthor()
+            createdAt,
+            author.toAuthor(),
+            category.toCategory()
         )
     }
 

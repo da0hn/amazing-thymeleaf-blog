@@ -15,9 +15,11 @@ interface ArticleJpaRepository : JpaRepository<ArticleEntity, Long> {
 
     @Query(
         "SELECT article FROM ArticleEntity article " +
+                "JOIN article.category category " +
                 "JOIN article.author author " +
                 "JOIN author.user user " +
-                "WHERE user.id = :userId OR :userId IS NULL "
+                "WHERE (user.id = :userId OR :userId IS NULL) " +
+                "AND (category.id = :categoryId OR :categoryId IS NULL)"
     )
-    fun findAll(pageable: Pageable, userId: Long?): Page<ArticleEntity>
+    fun findAll(pageable: Pageable, userId: Long?, categoryId: Long?): Page<ArticleEntity>
 }

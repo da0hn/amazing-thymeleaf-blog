@@ -7,5 +7,6 @@ package me.gabriel.blog.application.views.dtos
 data class ArticleFormDto(
     var title: String? = null,
     var subTitle: String? = null,
-    var content: String? = null
+    var content: String? = null,
+    var categoryId: Long? = null,
 )

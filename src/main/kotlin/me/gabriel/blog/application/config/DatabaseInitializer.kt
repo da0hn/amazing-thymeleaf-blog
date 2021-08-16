@@ -32,10 +32,10 @@ class DatabaseInitializer(
 
         val categories = createCategories()
 
-        val articles = createArticles(authors)
+        val articles = createArticles(authors, categories)
     }
 
-    private fun createArticles(authors: List<Author>): List<Article> {
+    private fun createArticles(authors: List<Author>, categories: List<Category>): List<Article> {
         if (articleRepository.countArticle() == 0L && authors.isNotEmpty()) {
 
             logger.info("Initializing Article data")
@@ -47,7 +47,8 @@ class DatabaseInitializer(
                     "Sub title 1",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     LocalDateTime.now(),
-                    authors[0]
+                    authors[0],
+                    categories[0]
                 ),
                 Article(
                     null,
@@ -55,7 +56,8 @@ class DatabaseInitializer(
                     "Sub title 2",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     LocalDateTime.now(),
-                    authors[0]
+                    authors[0],
+                    categories[0]
                 ),
                 Article(
                     null,
@@ -63,7 +65,8 @@ class DatabaseInitializer(
                     "Sub title 3",
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     LocalDateTime.now(),
-                    authors[1]
+                    authors[1],
+                    categories[1]
                 ),
             )
 
@@ -83,23 +86,23 @@ class DatabaseInitializer(
             logger.info("Initializing Category data")
 
             val categories = listOf(
-                Category("World"),
-                Category("U.S."),
-                Category("Technology"),
-                Category("Design"),
-                Category("Culture"),
-                Category("Business"),
-                Category("Politics"),
-                Category("Opinion"),
-                Category("Science"),
-                Category("Health"),
-                Category("Style"),
-                Category("Travel")
+                Category(null, "World", null),
+                Category(null, "U.S.", null),
+                Category(null, "Technology", null),
+                Category(null, "Design", null),
+                Category(null, "Culture", null),
+                Category(null, "Business", null),
+                Category(null, "Politics", null),
+                Category(null, "Opinion", null),
+                Category(null, "Science", null),
+                Category(null, "Health", null),
+                Category(null, "Style", null),
+                Category(null, "Travel", null)
             )
 
-            categories.forEach {
-                categoryRepository.save(it)
-                logger.info("Category ${it.name} created successfully")
+            categories.forEach { category ->
+                categoryRepository.save(category).also { category.id = it.id }
+                logger.info("Category ${category.name} created successfully")
             }
 
             return categories

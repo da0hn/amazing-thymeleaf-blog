@@ -5,6 +5,7 @@ import org.hibernate.Hibernate
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
+import javax.persistence.OneToMany
 
 /**
  * @author daohn
@@ -14,19 +15,23 @@ import javax.persistence.Id
 data class CategoryEntity(
     @Id
     @GeneratedValue
-    val id: Long? = null,
-    val name: String
+    var id: Long? = null,
+    var name: String,
+    @OneToMany(mappedBy = "category")
+    var articles: List<ArticleEntity>?
 ) {
     companion object {
         fun from(category: Category): CategoryEntity {
             return CategoryEntity(
-                name = category.name!!,
+                category.id,
+                category.name!!,
+                category.articles?.map(ArticleEntity::from)
             )
         }
     }
 
-    fun toCategory() : Category {
-        return Category(this.name)
+    fun toCategory(): Category {
+        return Category(this.id, this.name, null)
     }
 
     override fun equals(other: Any?): Boolean {

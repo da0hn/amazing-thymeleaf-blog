@@ -41,12 +41,20 @@ class ArticleController(
 
         model.addAttribute("article", ArticleFormDto())
 
+        useCaseHandler.handle(
+            findAllCategoryUseCase,
+            FindAllCategoryInputValue()
+        ) {
+            model.addAttribute("categories", it.categories)
+        }
+
         return "articles"
     }
 
     @GetMapping("/list")
     fun redirectToArticleList(
         @RequestParam(value = "userId", required = false) userId: Long?,
+        @RequestParam(value = "categoryId", required = false) categoryId: Long?,
         model: Model
     ): String {
         logger.info("Redirect to articles list page")
@@ -61,10 +69,13 @@ class ArticleController(
         if (userId != null) {
             logger.info("Filtering articles by user with id: $userId")
         }
+        if (categoryId != null) {
+            logger.info("Filtering articles by category with id: $categoryId")
+        }
 
         useCaseHandler.handle(
             findAllArticleUseCase,
-            FindAllArticleInputValue(0, 10, userId)
+            FindAllArticleInputValue(0, 10, userId, categoryId)
         ) {
             model.addAttribute("articles", it.articles.content)
         }

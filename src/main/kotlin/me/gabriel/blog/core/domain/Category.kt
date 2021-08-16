@@ -5,5 +5,7 @@ package me.gabriel.blog.core.domain
  * @since 20/07/2021
  */
 data class Category(
-    var name: String?
+    var id: Long?,
+    var name: String?,
+    var articles: List<Article>?
 )

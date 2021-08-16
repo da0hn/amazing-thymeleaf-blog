@@ -5,6 +5,7 @@ import me.gabriel.blog.core.ports.CategoryRepository
 import me.gabriel.blog.infra.database.entities.CategoryEntity
 import me.gabriel.blog.infra.database.repositories.CategoryJpaRepository
 import org.springframework.stereotype.Component
+import java.util.*
 
 /**
  * @author daohn
@@ -15,12 +16,14 @@ class CategoryRepositoryAdapter(
     private val repository: CategoryJpaRepository
 ) : CategoryRepository {
 
-    override fun save(category: Category) {
+    override fun save(category: Category): Category {
         val entity = CategoryEntity.from(category)
-        this.repository.save(entity)
+        return this.repository.save(entity).toCategory()
     }
 
     override fun count(): Long = this.repository.count()
 
     override fun findAll(): List<Category> = this.repository.findAll().map(CategoryEntity::toCategory).toList()
+
+    override fun findById(categoryId: Long): Optional<Category> = this.repository.findById(categoryId).map(CategoryEntity::toCategory)
 }

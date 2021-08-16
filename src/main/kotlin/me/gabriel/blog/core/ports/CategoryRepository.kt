@@ -1,6 +1,7 @@
 package me.gabriel.blog.core.ports
 
 import me.gabriel.blog.core.domain.Category
+import java.util.*
 
 /**
  * @author daohn
@@ -8,8 +9,9 @@ import me.gabriel.blog.core.domain.Category
  */
 interface CategoryRepository {
 
-    fun save(category: Category)
+    fun save(category: Category): Category
     fun count(): Long
     fun findAll(): List<Category>
+    fun findById(categoryId: Long): Optional<Category>
 
 }

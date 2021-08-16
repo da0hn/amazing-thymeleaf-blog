@@ -22,6 +22,7 @@ class FindAllCategoryUseCase(
 }
 
 class FindAllCategoryInputValue : UseCase.InputValue
+
 data class FindAllCategoryOutputValue(
     val categories: List<Category>
 ) : UseCase.OutputValue

@@ -101,7 +101,11 @@
 
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" href="#" th:each="category: ${categories}">
+          <a class="p-2 text-muted"
+             href="articles-list.html"
+             th:each="category: ${categories}"
+             th:href="@{/articles/list(categoryId=${category.id})}"
+          >
             <span th:text="${category.name}">Category</span>
           </a>
         </nav>
@@ -148,6 +152,9 @@
               </div>
               <div class="badge badge-secondary">
                 <span th:text="${article.date}">January 1, 2014 by</span>
+              </div>
+              <div class="badge badge-secondary">
+                <span th:text="${article.category.name}">categoria</span>
               </div>
             </div>
 

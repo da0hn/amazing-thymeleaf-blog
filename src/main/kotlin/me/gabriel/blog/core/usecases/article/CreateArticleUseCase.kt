@@ -3,8 +3,10 @@ package me.gabriel.blog.core.usecases.article
 import me.gabriel.blog.application.views.dtos.ArticleFormDto
 import me.gabriel.blog.core.domain.Article
 import me.gabriel.blog.core.domain.Author
+import me.gabriel.blog.core.domain.Category
 import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.ports.ArticleRepository
+import me.gabriel.blog.core.ports.CategoryRepository
 import me.gabriel.blog.core.usecases.UseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -16,7 +18,8 @@ import java.time.LocalDateTime
  */
 @Component
 class CreateArticleUseCase(
-    private val articleRepository: ArticleRepository
+    private val articleRepository: ArticleRepository,
+    private val categoryRepository: CategoryRepository
 ) : UseCase<CreateArticleInputValue, CreateArticleOutputValue> {
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -26,11 +29,15 @@ class CreateArticleUseCase(
 
         val author = createAuthorRelationship(input.user)
 
+        val category = createCategoryRelationship(input.article.categoryId)
+
+
         val articleToCreate = Article(
             title = input.article.title!!,
             subTitle = input.article.subTitle!!,
             content = input.article.content!!,
-            author = author
+            author = author,
+            category = category
         )
 
         logger.info("Relationship with '${articleToCreate.author.user.name}' created successfully")
@@ -43,12 +50,18 @@ class CreateArticleUseCase(
         return CreateArticleOutputValue()
     }
 
+    private fun createCategoryRelationship(categoryId: Long?): Category {
+        return categoryRepository
+            .findById(categoryId!!)
+            .orElseThrow()
+    }
+
     private fun createAuthorRelationship(
         user: User,
-    ) : Author {
+    ): Author {
         val authorNullable = articleRepository.findAuthorByUserId(user.id!!)
 
-        if(authorNullable.isEmpty) {
+        if (authorNullable.isEmpty) {
             val authorToCreate = Author(user)
             return articleRepository.saveAuthor(authorToCreate)
         }
@@ -59,4 +72,5 @@ class CreateArticleUseCase(
 }
 
 class CreateArticleInputValue(val article: ArticleFormDto, val user: User) : UseCase.InputValue
+
 class CreateArticleOutputValue : UseCase.OutputValue

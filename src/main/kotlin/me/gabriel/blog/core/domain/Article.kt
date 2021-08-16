@@ -13,4 +13,5 @@ data class Article(
     var content: String,
     var date: LocalDateTime? = null,
     var author: Author,
+    var category: Category
 )
