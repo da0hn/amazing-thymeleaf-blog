@@ -15,6 +15,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.servlet.http.HttpSession
 
@@ -44,7 +45,10 @@ class ArticleController(
     }
 
     @GetMapping("/list")
-    fun redirectToArticleList(model: Model): String {
+    fun redirectToArticleList(
+        @RequestParam(value = "userId", required = false) userId: Long?,
+        model: Model
+    ): String {
         logger.info("Redirect to articles list page")
 
         useCaseHandler.handle(
@@ -54,9 +58,13 @@ class ArticleController(
             model.addAttribute("categories", it.categories)
         }
 
+        if (userId != null) {
+            logger.info("Filtering articles by user with id: $userId")
+        }
+
         useCaseHandler.handle(
             findAllArticleUseCase,
-            FindAllArticleInputValue(0, 10)
+            FindAllArticleInputValue(0, 10, userId)
         ) {
             model.addAttribute("articles", it.articles.content)
         }

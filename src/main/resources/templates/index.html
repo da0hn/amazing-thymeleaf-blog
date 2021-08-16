@@ -81,7 +81,8 @@
                 <a class="dropdown-item" href="articles.html" th:href="@{/articles}">
                   <i class="fas fa-plus"></i> Novo Artigo
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="articles-list.html"
+                   th:href="@{/articles/list(userId=${session.currentUser.id})}">
                   <i class="fas fa-newspaper"></i> Meus Artigos
                 </a>
                 <a class="dropdown-item" href="articles-list.html" th:href="@{/articles/list}">

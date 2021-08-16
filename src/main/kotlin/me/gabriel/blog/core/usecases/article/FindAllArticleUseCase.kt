@@ -21,11 +21,12 @@ class FindAllArticleUseCase(
 
         val articles = articleRepository.findAllPaginatedArticles(
             page,
-            input.elementsPerPage
+            input.elementsPerPage,
+            input.userId
         )
 
-        val next = if(page >= articles.totalElements-1) page else page + 1
-        val previous = if(page <= 0) 0 else page -1
+        val next = if (page >= articles.totalElements - 1) page else page + 1
+        val previous = if (page <= 0) 0 else page - 1
 
         return FindAllArticleOutputValue(
             articles,
@@ -38,7 +39,8 @@ class FindAllArticleUseCase(
 
 class FindAllArticleInputValue(
     val page: Int,
-    val elementsPerPage: Int = 1
+    val elementsPerPage: Int = 1,
+    val userId: Long? = null
 ) : UseCase.InputValue
 
 class FindAllArticleOutputValue(

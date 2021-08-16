@@ -24,8 +24,8 @@ class ArticleRepositoryAdapter(
 
     override fun findAllArticles(): List<Article> = this.articleRepository.findAll().map(ArticleEntity::toArticle)
 
-    override fun findAllPaginatedArticles(page: Int, elementPerPage: Int): Page<Article> = this.articleRepository
-        .findAll(PageRequest.of(page, elementPerPage))
+    override fun findAllPaginatedArticles(page: Int, elementPerPage: Int, userId: Long?): Page<Article> = this.articleRepository
+        .findAll(PageRequest.of(page, elementPerPage), userId)
         .map(ArticleEntity::toArticle)
 
     override fun countArticle(): Long = this.articleRepository.count()

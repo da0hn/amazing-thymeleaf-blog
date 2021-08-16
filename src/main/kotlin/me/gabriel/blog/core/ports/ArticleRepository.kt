@@ -13,7 +13,7 @@ interface ArticleRepository {
 
     fun findAllArticles(): List<Article>
 
-    fun findAllPaginatedArticles(page: Int, elementPerPage: Int): Page<Article>
+    fun findAllPaginatedArticles(page: Int, elementPerPage: Int, userId: Long?): Page<Article>
 
     fun countArticle(): Long
 
