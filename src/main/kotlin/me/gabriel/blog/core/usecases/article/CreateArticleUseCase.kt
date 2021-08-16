@@ -33,6 +33,7 @@ class CreateArticleUseCase(
 
 
         val articleToCreate = Article(
+            id = input.article.id,
             title = input.article.title!!,
             subTitle = input.article.subTitle!!,
             content = input.article.content!!,

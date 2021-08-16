@@ -15,6 +15,8 @@ interface ArticleRepository {
 
     fun findAllPaginatedArticles(page: Int, elementPerPage: Int, userId: Long?, categoryId: Long?): Page<Article>
 
+    fun findArticleById(id: Long): Optional<Article>
+
     fun countArticle(): Long
 
     fun saveArticle(article: Article): Article
@@ -24,5 +26,6 @@ interface ArticleRepository {
     fun saveAuthor(author: Author): Author
 
     fun countAuthor(): Long
+
 
 }

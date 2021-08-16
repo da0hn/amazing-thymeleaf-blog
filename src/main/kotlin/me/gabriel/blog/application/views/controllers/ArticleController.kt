@@ -3,19 +3,13 @@ package me.gabriel.blog.application.views.controllers
 import me.gabriel.blog.application.views.dtos.ArticleFormDto
 import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.usecases.UseCaseHandler
-import me.gabriel.blog.core.usecases.article.CreateArticleInputValue
-import me.gabriel.blog.core.usecases.article.CreateArticleUseCase
-import me.gabriel.blog.core.usecases.article.FindAllArticleInputValue
-import me.gabriel.blog.core.usecases.article.FindAllArticleUseCase
+import me.gabriel.blog.core.usecases.article.*
 import me.gabriel.blog.core.usecases.category.FindAllCategoryInputValue
 import me.gabriel.blog.core.usecases.category.FindAllCategoryUseCase
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.servlet.http.HttpSession
 
@@ -29,7 +23,8 @@ class ArticleController(
     private val useCaseHandler: UseCaseHandler,
     private val createArticleUseCase: CreateArticleUseCase,
     private val findAllArticleUseCase: FindAllArticleUseCase,
-    private val findAllCategoryUseCase: FindAllCategoryUseCase
+    private val findAllCategoryUseCase: FindAllCategoryUseCase,
+    private val findByIdArticleUseCase: FindByIdArticleUseCase,
 ) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -107,4 +102,37 @@ class ArticleController(
         return "redirect:/"
     }
 
+
+    @GetMapping("/edit/{id}")
+    fun redirectToArticleEdit(
+        @PathVariable("id") id: Long,
+        model: Model
+    ): String {
+        logger.info("Redirect to article page")
+
+        useCaseHandler.handle(
+            findByIdArticleUseCase,
+            FindByIdArticleInputValue(id)
+        ) { output ->
+            model.addAttribute(
+                "article",
+                ArticleFormDto(
+                    output.article.id,
+                    output.article.title,
+                    output.article.subTitle,
+                    output.article.content,
+                    output.article.category.id
+                )
+            )
+        }
+
+        useCaseHandler.handle(
+            findAllCategoryUseCase,
+            FindAllCategoryInputValue()
+        ) {
+            model.addAttribute("categories", it.categories)
+        }
+
+        return "articles"
+    }
 }
