@@ -26,15 +26,15 @@ class SignUpController(
     private val logger: Logger = LoggerFactory.getLogger(javaClass)
 
     @GetMapping
-    fun form(model: Model): String {
-        logger.info("form()")
+    fun redirectToSignUp(model: Model): String {
+        logger.info("Redirect to sign up page")
         model.addAttribute("user", UserFormDto())
         return "sign-up"
     }
 
     @PostMapping
     fun signup(user: UserFormDto, model: Model): String {
-        logger.info("signup()")
+        logger.info("Creating user ${user.name}")
         try {
             useCaseHandler.handle(
                 createUserUseCase,

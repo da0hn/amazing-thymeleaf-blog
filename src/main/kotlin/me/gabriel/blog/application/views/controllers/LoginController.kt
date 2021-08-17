@@ -28,14 +28,16 @@ class LoginController(
 
     @GetMapping
     fun redirectToLogin(model: Model): String {
-        logger.info("redirectToLogin()")
+        logger.info("Redirect to login page")
+
         model.addAttribute("user", UserLoginDto())
+
         return "login"
     }
 
     @PostMapping
     fun login(user: UserLoginDto, model: Model, session: HttpSession): String {
-        logger.info("login()")
+        logger.info("Running login in blog")
 
         try {
             val loggedUser = useCaseHandler.handle(
@@ -57,13 +59,20 @@ class LoginController(
 
             return "login"
         }
+
+        logger.info("Redirect to main page")
+
         return "redirect:/"
     }
 
     @GetMapping("/logout")
     fun logout(session: HttpSession): String {
 
+        logger.info("Logging out of blog")
+
         session.invalidate()
+
+        logger.info("Redirect to main page")
 
         return "redirect:/"
     }
