@@ -107,12 +107,17 @@
             lacinia bibendum nulla sed consectetur.</p>
 
           <a href="articles.html" th:href="@{/articles/edit/{id}(id=${article.id})}"
-             class="btn btn-light btn-small"
+             class="btn btn-light btn-small float-right"
              th:if="${article.author.user.id == session.currentUser?.id}"
           >
             <i class="fas fa-edit"></i>
           </a>
 
+          <a href="articles.html" th:href="@{/articles/delete/{id}(id=${article.id})}"
+             class="btn btn-light btn-small float-right"
+             th:if="${article.author.user.id == session.currentUser?.id}">
+            <i class="fas fa-trash"></i>
+          </a>
         </div>
 
         <div class="card-footer text-muted">
@@ -122,7 +127,7 @@
           <div class="badge badge-secondary">
             <span th:text="${article.date}">January 1, 2014 by</span>
           </div>
-          <div class="badge badge-secondary">
+          <div class="badge badge-secondary float-right">
             <span th:text="${article.category.name}">category</span>
           </div>
         </div>

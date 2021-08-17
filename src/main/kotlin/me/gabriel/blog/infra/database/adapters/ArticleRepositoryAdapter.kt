@@ -31,6 +31,10 @@ class ArticleRepositoryAdapter(
 
     override fun findArticleById(id: Long): Optional<Article> = this.articleRepository.findById(id).map(ArticleEntity::toArticle)
 
+    override fun deleteArticleById(articleId: Long) = this.articleRepository.deleteById(articleId)
+
+    override fun thisArticleExists(articleId: Long): Boolean = this.articleRepository.existsById(articleId)
+
     override fun countArticle(): Long = this.articleRepository.count()
 
     override fun saveArticle(article: Article): Article = this.articleRepository

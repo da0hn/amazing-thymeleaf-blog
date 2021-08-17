@@ -17,6 +17,10 @@ interface ArticleRepository {
 
     fun findArticleById(id: Long): Optional<Article>
 
+    fun deleteArticleById(articleId: Long)
+
+    fun thisArticleExists(articleId: Long): Boolean
+
     fun countArticle(): Long
 
     fun saveArticle(article: Article): Article

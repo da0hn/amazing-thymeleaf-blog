@@ -25,6 +25,7 @@ class ArticleController(
     private val findAllArticleUseCase: FindAllArticleUseCase,
     private val findAllCategoryUseCase: FindAllCategoryUseCase,
     private val findByIdArticleUseCase: FindByIdArticleUseCase,
+    private val deleteByIdArticleUseCase: DeleteByIdArticleUseCase,
 ) {
 
     private val logger = LoggerFactory.getLogger(javaClass)
@@ -44,6 +45,23 @@ class ArticleController(
         }
 
         return "articles"
+    }
+
+    @GetMapping("/delete/{articleId}")
+    fun delete(
+        @PathVariable("articleId") articleId: Long,
+        model: Model,
+    ): String {
+        logger.info("Running delete of article with id $articleId")
+
+        useCaseHandler.handle(
+            deleteByIdArticleUseCase,
+            DeleteByIdArticleInputValue(articleId)
+        ) {
+            logger.info("Article removed successfully")
+        }
+
+        return "redirect:/articles/list"
     }
 
     @GetMapping("/list")
