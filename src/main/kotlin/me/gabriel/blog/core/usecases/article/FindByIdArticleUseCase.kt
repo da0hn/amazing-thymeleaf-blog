@@ -18,7 +18,7 @@ class FindByIdArticleUseCase(
     override fun handle(input: FindByIdArticleInputValue): FindByIdArticleOutputValue {
         val article = repository
             .findArticleById(input.articleId)
-            .orElseThrow { ArticleNotFoundException("Artigo de id ${input.articleId} não encontrado.") }
+            .orElseThrow { ArticleNotFoundException("Article with id ${input.articleId} not found.") }
 
         return FindByIdArticleOutputValue(article)
     }
