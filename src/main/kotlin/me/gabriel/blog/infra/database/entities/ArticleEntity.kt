@@ -5,10 +5,7 @@ import org.hibernate.Hibernate
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import javax.persistence.*
 
 /**
  * @author daohn
@@ -21,6 +18,7 @@ data class ArticleEntity(
     var id: Long? = null,
     var title: String,
     var subTitle: String,
+    @Column(length = 50000)
     var content: String,
     @CreationTimestamp
     var createdAt: LocalDateTime? = null,
