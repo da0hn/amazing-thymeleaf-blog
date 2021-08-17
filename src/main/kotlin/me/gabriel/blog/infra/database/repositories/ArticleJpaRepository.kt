@@ -19,7 +19,8 @@ interface ArticleJpaRepository : JpaRepository<ArticleEntity, Long> {
                 "JOIN article.author author " +
                 "JOIN author.user user " +
                 "WHERE (user.id = :userId OR :userId IS NULL) " +
-                "AND (category.id = :categoryId OR :categoryId IS NULL)"
+                "AND (category.id = :categoryId OR :categoryId IS NULL) " +
+                "ORDER BY article.createdAt DESC "
     )
     fun findAll(pageable: Pageable, userId: Long?, categoryId: Long?): Page<ArticleEntity>
 }
