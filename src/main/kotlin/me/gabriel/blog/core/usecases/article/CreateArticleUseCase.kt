@@ -5,6 +5,7 @@ import me.gabriel.blog.core.domain.Article
 import me.gabriel.blog.core.domain.Author
 import me.gabriel.blog.core.domain.Category
 import me.gabriel.blog.core.domain.User
+import me.gabriel.blog.core.domain.exceptions.CategoryNotFoundException
 import me.gabriel.blog.core.ports.ArticleRepository
 import me.gabriel.blog.core.ports.CategoryRepository
 import me.gabriel.blog.core.usecases.UseCase
@@ -54,7 +55,7 @@ class CreateArticleUseCase(
     private fun createCategoryRelationship(categoryId: Long?): Category {
         return categoryRepository
             .findById(categoryId!!)
-            .orElseThrow()
+            .orElseThrow { CategoryNotFoundException("Category with id $categoryId not found") }
     }
 
     private fun createAuthorRelationship(
