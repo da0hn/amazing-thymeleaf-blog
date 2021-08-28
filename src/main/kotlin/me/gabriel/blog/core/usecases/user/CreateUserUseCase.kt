@@ -2,15 +2,13 @@ package me.gabriel.blog.core.usecases.user
 
 import me.gabriel.blog.application.views.dtos.UserFormDto
 import me.gabriel.blog.core.domain.User
-import me.gabriel.blog.core.usecases.UseCase
 import me.gabriel.blog.core.ports.UserRepository
-import org.springframework.stereotype.Component
+import me.gabriel.blog.core.usecases.UseCase
 
 /**
  * @author daohn
  * @since 17/07/2021
  */
-@Component
 class CreateUserUseCase(private val userRepository: UserRepository) : UseCase<CreateUserInputValue, CreateUserOutputValue> {
 
     override fun handle(input: CreateUserInputValue): CreateUserOutputValue {

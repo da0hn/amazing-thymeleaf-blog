@@ -4,13 +4,11 @@ import me.gabriel.blog.core.domain.Article
 import me.gabriel.blog.core.ports.ArticleRepository
 import me.gabriel.blog.core.usecases.UseCase
 import org.springframework.data.domain.Page
-import org.springframework.stereotype.Component
 
 /**
  * @author daohn
  * @since 06/08/2021
  */
-@Component
 class FindAllArticleUseCase(
     private val articleRepository: ArticleRepository
 ) : UseCase<FindAllArticleInputValue, FindAllArticleOutputValue> {

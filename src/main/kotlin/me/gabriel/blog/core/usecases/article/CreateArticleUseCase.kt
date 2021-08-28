@@ -8,22 +8,19 @@ import me.gabriel.blog.core.domain.User
 import me.gabriel.blog.core.domain.exceptions.CategoryNotFoundException
 import me.gabriel.blog.core.ports.ArticleRepository
 import me.gabriel.blog.core.ports.CategoryRepository
+import me.gabriel.blog.core.ports.Logger
 import me.gabriel.blog.core.usecases.UseCase
-import org.slf4j.LoggerFactory
-import org.springframework.stereotype.Component
 import java.time.LocalDateTime
 
 /**
  * @author daohn
  * @since 04/08/2021
  */
-@Component
 class CreateArticleUseCase(
     private val articleRepository: ArticleRepository,
-    private val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository,
+    private val logger: Logger
 ) : UseCase<CreateArticleInputValue, CreateArticleOutputValue> {
-
-    private val logger = LoggerFactory.getLogger(javaClass)
 
     override fun handle(input: CreateArticleInputValue): CreateArticleOutputValue {
 
